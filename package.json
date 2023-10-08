@@ -6,8 +6,8 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "LICENSE"
+    "LICENSE",
+    "dist"
   ],
   "config": {
     "commitizen": {

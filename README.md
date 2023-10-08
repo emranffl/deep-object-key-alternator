@@ -1,12 +1,12 @@
 # deep-object-key-alternator
 
 ![npm version](https://img.shields.io/npm/v/deep-object-key-alternator.svg?style=flat)
-![npm downloads](https://img.shields.io/npm/dm/deep-object-key-alternator.svg?style=flat)
+![Code Size](https://img.shields.io/github/languages/code-size/emranffl/deep-object-key-alternator)
 ![GitHub license](https://img.shields.io/github/license/emranffl/deep-object-key-alternator.svg?style=flat)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![Jest Tests](https://img.shields.io/badge/Jest%20Tests-Passed-brightgreen.svg)
-![Code Size](https://img.shields.io/github/languages/code-size/emranffl/deep-object-key-alternator)
 ![GitHub Actions/CI](https://github.com/emranffl/deep-object-key-alternator/workflows/Node.js%20CI/badge.svg)
+[![npm downloads](https://img.shields.io/npm/dm/deep-object-key-alternator.svg?style=flat)](https://www.npmjs.com/package/deep-object-key-alternator)
 
 [deepObjectKeyAlternator](./docs/modules.md) is a versatile utility function that allows you to recursively parse an object, applying a key mapping to rename object keys. It's particularly handy when you need to transform the structure of nested objects while preserving the original data.
 
@@ -28,9 +28,11 @@ pnpm add deep-object-key-alternator
 
 ## Usage
 
-Here's how you can use deepObjectKeyAlternator in your Node.js or TypeScript projects:
+Here's how you can use deepObjectKeyAlternator in your projects:
 
-```javascript
+```ts
+import { deepObjectKeyAlternator } from "deep-object-key-alternator"
+// or
 const { deepObjectKeyAlternator } = require("deep-object-key-alternator")
 
 // Define your input object
