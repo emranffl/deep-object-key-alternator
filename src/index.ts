@@ -1,20 +1,45 @@
-/**
- * Recursively parses an object, applying a key mapping to rename object keys.
- *
- * @param inputObject - The input object to be parsed.
- * @param keyMapping - An object specifying key mapping rules.
- * @returns A new object with keys renamed according to the key mapping.
- */
 type KeyMapping<T> = Record<keyof T, string>
 
 type DeepKeyMapping<T> = {
   [K in keyof T]: T[K] extends object
-    ? T[K] extends Array<NonNullable<unknown>>
-      ? Array<DeepKeyMapping<T[K][number]>>
-      : DeepKeyMapping<T[K]>
-    : T[K]
+  ? T[K] extends Array<NonNullable<unknown>>
+  ? Array<DeepKeyMapping<T[K][number]>>
+  : DeepKeyMapping<T[K]>
+  : T[K]
 }
 
+/**
+ * Recursively parses an object/array, applying a key mapping to rename the keys.
+ *
+ * @param inputObject - The input object to be parsed.
+ * @param keyMapping - An object specifying key mapping rules.
+ * @example 
+ * ```ts
+ * const inputObject = {
+ *  foo: "bar",
+ *  baz: {
+ *   qux: "quux"
+ *   }
+ * }
+ * 
+ * const keyMapping = {
+ *  foo: "boo",
+ *  qux: "que"
+ * }
+ * 
+ * const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
+ * 
+ * console.log(parsedObject)
+ * // {
+ * //  boo: "bar",
+ * //  baz: {
+ * //   que: "quux"
+ * //   }
+ * // }
+ * ```
+ * 
+ * @returns A new object with keys renamed according to the key mapping.
+ */
 export function deepObjectKeyAlternator<T extends Record<string, any>>(
   inputObject: T,
   keyMapping: Partial<KeyMapping<DeepKeyMapping<T>>> | Record<string, string> = {}
