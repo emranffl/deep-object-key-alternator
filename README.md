@@ -64,7 +64,7 @@ console.log(parsedObject)
 
 - Recursively parses nested objects.
 - Customizable key mapping.
-- Preserves the structure of arrays.
+<!-- - Preserves the structure of arrays. -->
 
 ## License
 
