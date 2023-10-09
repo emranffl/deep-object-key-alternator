@@ -1,12 +1,13 @@
 {
-	"compilerOptions": {
-		"target": "ES6",
-		"module": "CommonJS",
-		"outDir": "./dist",
-		"rootDir": "./src",
-		"declaration": true,
-		"declarationDir": "./dist/types"
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "outDir": "./dist/esm", // Output directory for ESM
+    "rootDir": "./src", // Source directory
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "moduleResolution": "Bundler"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
