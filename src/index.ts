@@ -11,41 +11,51 @@ type DeepKeyMapping<T> = {
 /**
  * Recursively parses an object/array, applying a key mapping to rename the keys.
  *
- * @param inputObject - The input object to be parsed.
+ * @param inputObject - The input object or array to be parsed.
  * @param keyMapping - An object specifying key mapping rules.
  * @example
  * ```ts
  * const inputObject = {
- *  foo: "bar",
- *  baz: {
- *   qux: "quux"
+ *   foo: "bar",
+ *   baz: {
+ *     qux: "quux"
  *   }
- * }
+ * };
  *
  * const keyMapping = {
- *  foo: "boo",
- *  qux: "que"
- * }
+ *   foo: "boo",
+ *   qux: "que"
+ * };
  *
- * const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
+ * const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping);
  *
- * console.log(parsedObject)
+ * console.log(parsedObject);
  * // {
- * //  boo: "bar",
- * //  baz: {
- * //   que: "quux"
+ * //   boo: "bar",
+ * //   baz: {
+ * //     que: "quux"
  * //   }
  * // }
  * ```
  *
- * @returns A new object with keys renamed according to the key mapping.
+ * @returns A new object or array with keys renamed according to the key mapping.
  */
 export function deepObjectKeyAlternator<T extends Record<string, any>>(
   inputObject: T,
   keyMapping:
     | Partial<KeyMapping<DeepKeyMapping<T>>>
     | Record<string, string> = {}
-): DeepKeyMapping<T> {
+): DeepKeyMapping<T> | any[] {
+  if (Array.isArray(inputObject)) {
+    // If the input is an array, map its elements recursively.
+    return inputObject.map((item: T[keyof T][number]) =>
+      deepObjectKeyAlternator(
+        item,
+        keyMapping as Partial<KeyMapping<DeepKeyMapping<T[keyof T][number]>>>
+      )
+    ) as DeepKeyMapping<T>[keyof T]
+  }
+
   const alteredObject = {} as DeepKeyMapping<T>
 
   for (const key in inputObject) {

@@ -1,4 +1,4 @@
-import { deepObjectKeyAlternator } from "../index" // Replace with the actual path to your module
+import { deepObjectKeyAlternator } from "../index"
 
 describe("deepObjectKeyAlternator", () => {
   it("should rename keys in a flat object", () => {
@@ -47,32 +47,32 @@ describe("deepObjectKeyAlternator", () => {
     expect(parsedObject).toEqual(expectedObject)
   })
 
-  // it("should rename keys in an array of objects", () => {
-  //   const inputObject = [
-  //     {
-  //       foo: "bar",
-  //     },
-  //     {
-  //       baz: "qux",
-  //     },
-  //   ]
+  it("should rename keys in an array of objects", () => {
+    const inputObject = [
+      {
+        foo: "bar",
+      },
+      {
+        baz: "qux",
+      },
+    ]
 
-  //   const keyMapping = {
-  //     foo: "boo",
-  //     baz: "quux",
-  //   }
+    const keyMapping = {
+      foo: "boo",
+      baz: "quux",
+    }
 
-  //   const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
+    const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
 
-  //   const expectedObject = [
-  //     {
-  //       boo: "bar",
-  //     },
-  //     {
-  //       quux: "qux",
-  //     },
-  //   ]
+    const expectedObject = [
+      {
+        boo: "bar",
+      },
+      {
+        quux: "qux",
+      },
+    ]
 
-  //   expect(parsedObject).toEqual(expectedObject)
-  // })
+    expect(parsedObject).toEqual(expectedObject)
+  })
 })
