@@ -4,55 +4,25 @@
 
 ### deepObjectKeyAlternator
 
-▸ **deepObjectKeyAlternator**<`T`\>(`inputObject`, `keyMapping?`): `DeepKeyMapping`<`T`\>
-
-Recursively parses an object/array, applying a key mapping to rename the keys.
+▸ **deepObjectKeyAlternator**<`T`\>(`inputObject`, `keyMapping?`): `T`
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `Record`<`string`, `any`\> |
+| `T` | extends `DeepObject` \| `DeepArrayMapping`<`DeepObject`\> |
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `inputObject` | `T` | The input object to be parsed. |
-| `keyMapping` | `Record`<`string`, `string`\> \| `Partial`<`KeyMapping`<`DeepKeyMapping`<`T`\>\>\> | An object specifying key mapping rules. |
+| Name | Type |
+| :------ | :------ |
+| `inputObject` | `T` |
+| `keyMapping` | `Record`<`string`, `string`\> \| `Partial`<`KeyMapping`<`T` extends `DeepArrayMapping`<`DeepObject`\> ? `DeepArrayMapping`<`DeepObject`\> : `T`\>\> |
 
 #### Returns
 
-`DeepKeyMapping`<`T`\>
-
-A new object with keys renamed according to the key mapping.
-
-**`Example`**
-
-```ts
-const inputObject = {
- foo: "bar",
- baz: {
-  qux: "quux"
-  }
-}
-
-const keyMapping = {
- foo: "boo",
- qux: "que"
-}
-
-const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
-
-console.log(parsedObject)
-// {
-//  boo: "bar",
-//  baz: {
-//   que: "quux"
-//   }
-// }
-```
+`T`
 
 #### Defined in
 
-index.ts:43
+index.ts:11

@@ -1,28 +1,8 @@
+import { log } from "console"
 import { deepObjectKeyAlternator } from "../index"
 
 describe("deepObjectKeyAlternator", () => {
-  it("should rename keys in a flat object", () => {
-    const inputObject = {
-      foo: "bar",
-      baz: "qux",
-    }
-
-    const keyMapping = {
-      foo: "boo",
-      baz: "quux",
-    }
-
-    const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
-
-    const expectedObject = {
-      boo: "bar",
-      quux: "qux",
-    }
-
-    expect(parsedObject).toEqual(expectedObject)
-  })
-
-  it("should rename keys in a nested object", () => {
+  it("should handle renaming keys in a simple object", () => {
     const inputObject = {
       foo: "bar",
       baz: {
@@ -35,44 +15,102 @@ describe("deepObjectKeyAlternator", () => {
       qux: "que",
     }
 
-    const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
-
-    const expectedObject = {
+    const expectedOutput = {
       boo: "bar",
       baz: {
         que: "quux",
       },
     }
 
-    expect(parsedObject).toEqual(expectedObject)
+    const result = deepObjectKeyAlternator(inputObject, keyMapping)
+
+    log(expectedOutput, result)
+
+    expect(result).toEqual(expectedOutput)
   })
 
-  it("should rename keys in an array of objects", () => {
-    const inputObject = [
-      {
-        foo: "bar",
-      },
-      {
-        baz: "qux",
-      },
-    ]
-
-    const keyMapping = {
-      foo: "boo",
-      baz: "quux",
+  it("should handle null and undefined values", () => {
+    const inputObject = {
+      foo: null,
+      baz: undefined,
     }
 
-    const parsedObject = deepObjectKeyAlternator(inputObject, keyMapping)
+    const keyMapping = {
+      foo: "newFoo",
+      baz: "newBaz",
+    }
 
-    const expectedObject = [
-      {
-        boo: "bar",
-      },
-      {
-        quux: "qux",
-      },
-    ]
+    const expectedOutput = {
+      newFoo: null,
+      newBaz: undefined,
+    }
 
-    expect(parsedObject).toEqual(expectedObject)
+    const result = deepObjectKeyAlternator(inputObject, keyMapping)
+
+    log(expectedOutput, result)
+
+    expect(result).toEqual(expectedOutput)
+  })
+
+  it("should handle arrays of objects", () => {
+    const inputObject = {
+      items: [
+        { name: "item1", value: 42 },
+        { name: "item2", value: 73 },
+      ],
+    }
+
+    const keyMapping = {
+      items: "newItems",
+    }
+
+    const expectedOutput = {
+      newItems: [
+        { name: "item1", value: 42 },
+        { name: "item2", value: 73 },
+      ],
+    }
+
+    const result = deepObjectKeyAlternator(inputObject, keyMapping)
+
+    log(expectedOutput, result)
+
+    expect(result).toEqual(expectedOutput)
+  })
+
+  it("should handle complex nested objects", () => {
+    const inputObject = {
+      foo: "bar",
+      baz: {
+        qux: {
+          deepProp: "value",
+        },
+      },
+    }
+
+    const keyMapping = {
+      foo: "newFoo",
+      qux: "newQux",
+      deepProp: "newDeepProp",
+    }
+
+    const expectedOutput = {
+      newFoo: "bar",
+      baz: {
+        newQux: {
+          newDeepProp: "value",
+        },
+      },
+    }
+
+    const result = deepObjectKeyAlternator(inputObject, {
+      foo: "newFoo",
+      qux: "newQux",
+      deepProp: "newDeepProp",
+    })
+
+    log(expectedOutput, result)
+
+    expect(result).toEqual(expectedOutput)
   })
 })

@@ -1,7 +1,7 @@
 {
   "name": "deep-object-key-alternator",
   "version": "1.0.0",
-  "description": "",
+  "description": "deepObjectKeyAlternator is a versatile utility function that allows you to recursively parse an object or array of objects, applying a key mapping to rename object keys. It's particularly handy when you need to transform the structure of nested objects while preserving the original data.",
   "main": "dist/commonjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
@@ -28,11 +28,13 @@
   "scripts": {
     "build": "rm -r dist --force && tsc -p tsconfig.json && tsc -p tsconfig-commonjs.json",
     "dev": "tsc -w -p tsconfig.json && tsc -w -p tsconfig-commonjs.json",
-    "commit": "git-cz",
     "docify": "npx typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts --hideBreadcrumbs --hideInPageTOC && rm -r docs/README.md",
+    "format": "prettier --write .",
     "prepublishOnly": "npm run build",
+    "commit": "git-cz",
     "semantic-release": "semantic-release --branches main",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "pnpm run build && pnpm run test && pnpm run docify"
   },
   "keywords": [
     "deep",
@@ -40,9 +42,20 @@
     "key",
     "alternator",
     "deep-object-key-alternator",
-    "deep-object-key-alternate",
+    "deep-object-key",
+    "deep-object-alternator",
+    "deep-key-alternator",
     "object-key-alternator",
-    "object-key-alternate"
+    "deep-object",
+    "deep-key",
+    "deep-alternator",
+    "object-key",
+    "object-alternator",
+    "key-alternator",
+    "deep",
+    "object",
+    "key",
+    "alternator"
   ],
   "author": "Emran Hossain",
   "license": "MIT",
