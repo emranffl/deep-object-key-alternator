@@ -17,7 +17,7 @@
 | Name | Type |
 | :------ | :------ |
 | `inputObject` | `T` |
-| `keyMapping` | `Record`<`string`, `string`\> \| `Partial`<`KeyMapping`<`T` extends `DeepArrayMapping`<`DeepObject`\> ? `DeepArrayMapping`<`DeepObject`\> : `T`\>\> |
+| `keyMapping` | `Partial`<`KeyMapping`<`T` extends `DeepArrayMapping`<`DeepObject`\> ? `DeepArrayMapping`<`DeepObject`\> : `T`\>\> \| `Record`<`string`, `string`\> |
 
 #### Returns
 
